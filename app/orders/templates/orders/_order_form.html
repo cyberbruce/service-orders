@@ -1,0 +1,28 @@
+<form action="{% if form.instance.pk %}{% url 'orders:update' form.instance.pk %}{%else%}{% url 'orders:create' %}{%endif%}" novalidate method="post" autocomplete="off">
+    {% csrf_token %}
+    {{ form.customer.as_field_group }}
+
+    {# dynamic fields that update when the customer changes #}
+    {% include "orders/_fields_from_customer.html" %} 
+
+    <div class="grid md:grid-cols-[1fr_1fr_2fr] gap-4">
+    {{ form.due_date.as_field_group }}
+    {{ form.date_completed.as_field_group }}
+    </div>
+
+    <div class="grid md:grid-cols-[3fr_1fr] gap-2">
+        {{ form.equipment_description.as_field_group }}
+        {{ form.os_version.as_field_group }}
+    </div>
+
+    <div class="grid md:grid-cols-[300px_300px] gap-2">
+    {{ form.admin_password.as_field_group }}
+    {{ form.customer_po.as_field_group }}
+    </div>
+
+    {{ form.description_of_work.as_field_group }}
+    {{ form.work_performed.as_field_group }}
+   
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

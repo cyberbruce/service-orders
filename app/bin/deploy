@@ -1,0 +1,6 @@
+#!/bin/bash
+
+rsync -razv --exclude-from rsync-excludes.txt  * pyscale:~/app
+ssh pyscale ./run.sh
+
+

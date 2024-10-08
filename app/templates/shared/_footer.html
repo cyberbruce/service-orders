@@ -1,0 +1,9 @@
+{% if user.is_authenticated %}
+<div class="fixed bottom-0 left-0 h-10 p-4 bg-gray-100 w-full flex gap-4 items-center">
+    <a href="{% url "account_logout" %}">Logout ({{ user }})</a>
+    
+    {% if user.is_superuser %}
+    <a href="{% url 'admin:index' %}" target="_blank">Administration</a>
+    {% endif %}
+</div>
+{% endif %}

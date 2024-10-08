@@ -1,0 +1,74 @@
+{% extends './base.html' %}
+
+{% block main %}
+  <div class="actions">
+    <a href="{% url 'orders:list' %}">Back to Orders</a>
+    <a href="{% url 'orders:update' order.pk %}">Change Order</a>
+  </div>
+
+
+ {# header with workorder detail #}
+  <div class="prose max-w-none grid md:grid-cols-[3fr_1fr] gap-2 border-b border-neutral-500 py-2">
+    <div>
+      <h2 class="m-0">{{ order.customer.name }}</h2>
+    </div>
+
+    <div class="flex gap-2 text-lg">
+      <div>Work Order#</div> <span class="font-bold">{{ order.order_number }}</span>
+    </div>
+
+    <div class="text-lg grid md:grid-cols-[2fr_1fr] gap-2">
+      <div>
+        {% include 'orders/_address.html' with order=order %}
+      </div>
+      <div class=" ">
+        <div class="text-lg flex flex-wrap justify-center gap-1 bg-warning text-black rounded-lg p-2 w-full">
+            <div>Due Date</div> <div class="font-bold">{{ order.due_date }}</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      {% if order.date_completed %}
+      <div class="text-lg flex flex-wrap justify-center gap-1 bg-success text-white rounded-lg p-2 w-full">
+        <div>Completed</div> <div class="font-bold">{{ order.date_completed }}</div>
+      </div>
+      {% else %}
+      <div class="text-lg flex flex-wrap justify-center gap-1 bg-primary text-white rounded-lg p-2 w-full">
+        <div>In-Process</div></div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {# end header with workorder detail #}
+
+
+  <div class="prose max-w-none mt-1"> 
+    <div>
+        <h3 class="text-lg my-0">Equipment Description</h3>
+        <div class="p-2">
+        {{ order.equipment_description|linebreaksbr }}
+        </div>
+    </div>
+
+    <div>
+        <h3 class="text-lg my-0">Description of Work</h3>
+        <div class="p-2">
+        {{ order.description_of_work|linebreaksbr }}
+        </div>
+    </div>
+
+
+    <div>
+        <h3 class="text-lg my-0">Work Performed</h3>
+        <div class="p-2">
+        {{ order.work_performed|linebreaksbr }}
+        </div>
+    </div>
+
+  </div>
+
+  <div hx-trigger="load, order:itemsUpdated from:body" hx-get="{% url "orders:line_items" order.pk %}" hx-target="this">
+
+  </div>
+{% endblock %}

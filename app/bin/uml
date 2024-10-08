@@ -1,0 +1,4 @@
+#!/bin/bash
+
+
+./manage.py graph_models -a --pygraphviz --output models.png -E -g

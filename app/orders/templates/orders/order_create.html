@@ -1,0 +1,13 @@
+{% extends "./base.html" %}
+
+{% block main %}
+<div class="actions">
+<a href="{% url 'orders:list' %}">Back to Orders</a>
+{% if form.instance.pk %}
+<a href="{% url 'orders:details' form.instance.pk %}" >Details</a>
+{% endif %}
+</div>
+<div class="my-2 bg-neutral-100 p-4 border border-gray-300 rounded-lg">
+    {% include "orders/_order_form.html" %}
+</div>
+{% endblock main %}

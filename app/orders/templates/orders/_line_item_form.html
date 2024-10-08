@@ -1,0 +1,39 @@
+<div>
+  <form hx-boost="true"
+    hx-push-url="false"
+    method="post"
+    novalidate
+    action="{% if form.instance.pk %}
+      {% url 'orders:update_line_item' order.pk form.instance.pk %}
+    {% else %}
+      {% url 'orders:create_line_item' order.pk %}
+    {% endif %}"
+    autocomplete="off">
+    {% csrf_token %}
+
+    <div class="p-4 bg-neutral-100 flex flex-wrap gap-4">
+      <button class="btn btn-primary">
+        {% if form.instance.pk %}
+          Update
+        {% else %}
+          Add
+        {% endif %}Labor
+      </button>
+      <a hx-get="{% url 'orders:details' order.pk %}" hx-target="body" class="btn btn-secondary">Close</a>
+    </div>
+
+    <div class="m-4">
+      <div class="prose my-2">
+        <h2>Labor Item Maintenance</h2>
+      </div>
+
+      {{ form }}
+    </div>
+  </form>
+
+  {% if form.instance.pk %}
+    <div class="m-4">
+      <a href="#" class="link-primary" hx-delete="{% url 'orders:delete_line_item' order.pk form.instance.pk %}" hx-confirm="Remove item, are you sure?">Remove Item</a>
+    </div>
+  {% endif %}
+</div>

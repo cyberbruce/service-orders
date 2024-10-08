@@ -1,0 +1,9 @@
+-r ./base.txt
+
+
+# https://pytest-django.readthedocs.io/en/latest/index.html
+pytest-django
+
+# https://factoryboy.readthedocs.io/en/stable/index.html
+factory_boy 
+

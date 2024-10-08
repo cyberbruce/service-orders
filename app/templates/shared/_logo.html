@@ -1,0 +1,11 @@
+{% load static %}
+
+<div class="grid md:grid-cols-[auto_1fr] items-center m-2 md:m-1">
+  <div class="prose mx-auto">
+    <img src="{% static 'images/logo_full.png' %}" class="object-fill w-[250px]" />
+  </div>
+
+  <div>
+    {% include 'shared/_tag_line.html' %}
+  </div>
+</div>

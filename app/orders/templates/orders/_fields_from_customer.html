@@ -1,0 +1,13 @@
+<div id="email_phone"  >
+
+    {{ form.address.as_field_group }}
+    <div class="grid md:grid-cols-[1fr_150px_1fr] lg:w-3/5 gap-2">
+        {{ form.city.as_field_group }}
+        {{ form.state.as_field_group }}
+        {{ form.zip.as_field_group }}
+    </div>
+    <div class="md:w-1/2">
+    {{ form.phone.as_field_group }}
+    {{ form.email.as_field_group }}
+    </div>
+</div>

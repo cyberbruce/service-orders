@@ -1,0 +1,12 @@
+{% load static %}
+<a href="{% url 'home' %}" class="flex">
+  <div class="grid grid-cols-[auto_1fr] m-2 md:m-1 items-center">
+    <div class="h-[60px] w-[60px]" hx-preserve="true">
+      <img src="{% static 'images/logo_image.png' %}" class="object-fill" />
+    </div>
+
+    <div class="px-4">
+      <h1 class="text-2xl my-0 p-0 text-blue-800 font-bold">California Computer Technologies</h1>
+    </div>
+  </div>
+</a>

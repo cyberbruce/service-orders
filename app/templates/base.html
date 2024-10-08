@@ -1,0 +1,40 @@
+{% load static %}
+<html lang="en" data-theme="mytheme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>    
+    <script type="text/javascript" src="{% static "index.js" %}" defer></script>
+    <link rel="stylesheet" href="{% static "main.css" %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta name="htmx-config" content='{"useTemplateFragments":"true"}'>
+</head>
+<body class="mb-20" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    
+    {% block body %}   
+        <div class="container mx-auto">
+            {% if user.is_authenticated %}
+            {% include "shared/_title.html" %}
+            {% endif %}
+
+            <div class="m-2"> 
+            {% include "shared/_messages.html" %}
+
+            {% block content %}
+            {% endblock content %}
+            </div>
+        </div>
+        
+    {% endblock body %}
+
+    {% block extra_body %}
+    {% endblock extra_body %}
+
+    {% block footer %}{% endblock footer %}
+
+    {% include "shared/_footer.html" %}
+    <div id="modal-slide" class="modal-overlay"></div>
+    <div id="dialog-target"></div>
+</body>
+</html>
