@@ -1,34 +1,23 @@
-{% extends "./base.html" %}
+{% extends './base.html' %}
 
 {% block main %}
-   
+  <div class="actions">
+    <a href="{% url 'orders:create' %}" class="button">Create Order</a>
+  </div>
 
-    <div class="actions">
-        <a href="{% url 'orders:create' %}" class="button">Create Order</a>
-    </div>
+  <div class="grid md:grid-cols-[1fr_2fr_3fr] gap-2 border border-neutral-600 bg-neutral-600 text-white rounded-lg my-2 px-2 py-1">
+    <div class="">Order#</div>
+    <div class="">Customer</div>
+    <div class="">Description of Work</div>
+  </div>
+  
+  {% for x in orders %}
+    <a href="{% url 'orders:details' x.pk %}" class="grid md:grid-cols-[1fr_2fr_3fr] gap-2 border border-neutral-400 bg-neutral-50 rounded-lg my-2 px-2 py-1 cursor-pointer hover:bg-yellow-100">
+      <div class="">{{ x.order_number }}</div>
+      <div class="font-semibold">{{ x.customer }}</div>
+      <div class="text-sm">{{ x.description_of_work|truncatechars:100 }}</div>
+    </a>
+  {% endfor %}
 
-
-    <div class="grid md:grid-cols-10 gap-4 border border-sky-600 bg-sky-600 text-white rounded-lg my-2 px-2 py-1 text-center">
-        <div class="px-4">Order#</div>
-        <div class="col-span-2">Customer</div>
-        <div class="col-span-2">Due/Completed</div>
-        <div class="col-span-5 text-left">Description of Work</div>
-    </div>
-
-    {% for x in  orders %}
-        <a href="{% url 'orders:details' x.pk %}" 
-             class="grid md:grid-cols-10 border border-sky-600 bg-sky-50 
-             rounded-lg my-2 px-2 py-1 cursor-pointer hover:bg-sky-100 text-center">
-            <div class="px-4">{{ x.order_number }}</div>
-            <div class="col-span-2 font-semibold">{{ x.customer }}</div>
-            <div class="col-span-2 text-sm">
-            <div>{{ x.due_date}}</div>
-            <div>{{ x.date_completed }}</div>
-            </div>
-            <div class="col-span-5 text-sm text-left">{{ x.description_of_work|truncatechars:100 }}</div>
-        </a>
-    {% endfor %}
-
-    {% include 'shared/_pager.html'  %}
-
-{% endblock main %}
+  {% include 'shared/_pager.html' %}
+{% endblock %}

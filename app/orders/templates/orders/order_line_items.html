@@ -1,11 +1,10 @@
-
-<div class="p-1 bg-base-200 my-1 rounded-lg">
-    <a href="#" hx-get="{% url 'orders:create_line_item' order.pk %}" class="btn btn-primary" hx-ext="modal-slide">Add Labor</a>
+{% load humanize %}
+<div class="p-2 bg-base-200 mb-1 rounded-tl-lg rounded-tr-lg">
+  <a href="#" hx-get="{% url 'orders:create_line_item' order.pk %}" class="btn btn-primary" hx-ext="modal-slide">Add Labor</a>
 </div>
 
-
 <div class="text-sm">
-<div class="md:text-center  text-left md:visible hidden md:grid grid-cols-1 md:grid-cols-8 gap-2 bg-secondary text-white p-2 rounded-tl-lg rounded-tr-lg">
+  <div class="md:text-center text-left md:visible hidden md:grid grid-cols-1 md:grid-cols-8 gap-2 bg-secondary text-white p-2">
     <div class="font-bold">Quantity</div>
     <div class="font-bold">Part#</div>
     <div class="font-bold">Description</div>
@@ -14,44 +13,44 @@
     <div class="font-bold">Time Finished</div>
     <div class="font-bold">Rate</div>
     <div class="font-bold">Total</div>
-</div>
+  </div>
 
-<div class="divide-y divide-gray-200">
+  <div class="divide-y divide-gray-200">
     {% for x in order.items.all %}
-    <div hx-get="{% url 'orders:update_line_item' order.pk x.pk %}" class="md:text-center  text-left  grid grid-cols-1 md:grid-cols-8 gap-2 md:p-2 p-4 cursor-pointer hover:bg-gray-100" hx-ext="modal-slide">
+      <div hx-get="{% url 'orders:update_line_item' order.pk x.pk %}" class="md:text-center text-left grid grid-cols-1 md:grid-cols-8 gap-2 md:p-2 p-4 cursor-pointer hover:bg-gray-100 even:bg-gray-200" hx-ext="modal-slide">
         <div>
-            <span class="inline-block md:hidden font-bold">Quantity:</span>
-            {{ x.quantity }}
+          <span class="inline-block md:hidden font-bold">Quantity:</span>
+          {{ x.quantity }}
         </div>
         <div>
-            <span class="inline-block md:hidden font-bold">Part#:</span>
-            {{ x.labor_item.name }}
+          <span class="inline-block md:hidden font-bold">Part#:</span>
+          {{ x.labor_item.name }}
         </div>
         <div>
-            <span class="inline-block md:hidden font-bold">Description:</span>
-            {{ x.description }}
+          <span class="inline-block md:hidden font-bold">Description:</span>
+          {{ x.description }}
         </div>
         <div>
-            <span class="inline-block md:hidden font-bold">Date:</span>
-            {{ x.date }}
+          <span class="inline-block md:hidden font-bold">Date:</span>
+          {{ x.date }}
         </div>
         <div>
-            <span class="inline-block md:hidden font-bold">Time Start:</span>
-            {{ x.start_time }}
+          <span class="inline-block md:hidden font-bold">Time Start:</span>
+          {{ x.start_time }}
         </div>
         <div>
-            <span class="inline-block md:hidden font-bold">Time Finished:</span>
-            {{ x.finish_time }}
+          <span class="inline-block md:hidden font-bold">Time Finished:</span>
+          {{ x.finish_time }}
         </div>
         <div>
-            <span class="inline-block md:hidden font-bold">Rate:</span>
-            {{ x.labor_rate|floatformat:"2" }}
+          <span class="inline-block md:hidden font-bold">Rate:</span>
+          {{ x.labor_rate|floatformat:'2'|intcomma }}
         </div>
-        <div>
-            <span class="inline-block md:hidden font-bold">Total:</span>
-            {{ x.total|floatformat:"2" }}
+        <div class="md:text-right text-left">
+          <span class="inline-block md:hidden font-bold">Total:</span>
+          {{ x.total|floatformat:'2'|intcomma }}
         </div>
-    </div>
+      </div>
     {% endfor %}
-</div>
+  </div>
 </div>

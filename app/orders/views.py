@@ -121,11 +121,6 @@ class UpdateOrderLineItemView(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             return close_modal_and_refresh_items(request)
-             
-
-    
-             
-        
         context = { 'form': form, 'order': order }
         return render(request, self.template_name, context)
 
